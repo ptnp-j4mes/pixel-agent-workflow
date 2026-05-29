@@ -232,3 +232,7 @@ nextjs ai-agents workflow pixel-art sprites agent-ui local-ai ollama cli-agents 
 ## License
 
 MIT — ใช้ต่อยอดเป็น playground หรือ internal agent UI ได้อิสระ
+
+## 🕹️ Responsive right console
+
+The right-side console is tuned for desktop, tablet, and mobile breakpoints. It uses sticky console controls, container-aware grids, horizontal tab scrolling on narrow sidebars, and overflow-safe cards for long model/CLI names.
