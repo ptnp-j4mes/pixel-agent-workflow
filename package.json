@@ -1,0 +1,43 @@
+{
+  "name": "pixel-agent-workflow",
+  "version": "0.1.0",
+  "private": false,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "cli:detect": "node scripts/detect-cli-agents.mjs",
+    "agent:run": "node scripts/run-agent-cli.mjs",
+    "agent:codex": "codex",
+    "agent:gemini": "gemini",
+    "agent:qwen": "qwen"
+  },
+  "dependencies": {
+    "@types/node": "latest",
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
+    "eslint": "latest",
+    "eslint-config-next": "latest",
+    "jszip": "latest",
+    "next": "latest",
+    "react": "latest",
+    "react-dom": "latest",
+    "typescript": "latest"
+  },
+  "devDependencies": {},
+  "description": "Pixel AI agent workflow playground with draggable sprite agents, editable scenes, workflow bubbles, model/CLI console, and local runtime settings.",
+  "license": "MIT",
+  "keywords": [
+    "nextjs",
+    "ai-agents",
+    "workflow",
+    "pixel-art",
+    "sprites",
+    "agent-ui",
+    "local-ai",
+    "ollama",
+    "cli-agents",
+    "model-console"
+  ]
+}

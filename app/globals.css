@@ -1,0 +1,3715 @@
+:root {
+  color-scheme: dark;
+  --bg: #07111d;
+  --panel: rgba(11, 24, 40, 0.78);
+  --panel-strong: rgba(13, 27, 45, 0.94);
+  --line: rgba(147, 207, 255, 0.22);
+  --text: #f3fbff;
+  --muted: #9eb6cc;
+  --cyan: #42d9ff;
+  --violet: #9b8cff;
+  --pet-frame-w: 192px;
+  --pet-frame-h: 208px;
+  --pet-sheet-w: 1536px;
+  --pet-sheet-h: 1872px;
+  --pet-idle-width: 1152px;
+  --pet-run-width: 1536px;
+  --pet-idle-row: 0px;
+  --pet-run-right-row: -208px;
+  --pet-run-left-row: -416px;
+  --pet-scale: 0.62;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  min-height: 100%;
+  margin: 0;
+}
+
+body {
+  background:
+    radial-gradient(circle at top left, rgba(66, 217, 255, 0.22), transparent 32rem),
+    radial-gradient(circle at bottom right, rgba(155, 140, 255, 0.18), transparent 38rem),
+    var(--bg);
+  color: var(--text);
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+button,
+textarea,
+select,
+input {
+  font: inherit;
+}
+
+button,
+select,
+.fileImportButton {
+  cursor: pointer;
+}
+
+code {
+  color: #dff8ff;
+  font-size: 0.86em;
+  padding: 0.14rem 0.34rem;
+  border: 1px solid rgba(147, 207, 255, 0.18);
+  border-radius: 8px;
+  background: rgba(3, 10, 19, 0.7);
+}
+
+.pageShell {
+  width: min(1500px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 32px 0 42px;
+}
+
+.heroPanel {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 24px;
+  align-items: end;
+  margin-bottom: 24px;
+  padding: 28px;
+  border: 1px solid var(--line);
+  border-radius: 28px;
+  background: linear-gradient(135deg, rgba(14, 31, 51, 0.92), rgba(8, 19, 33, 0.62));
+  box-shadow: 0 26px 90px rgba(0, 0, 0, 0.28);
+  overflow: hidden;
+  position: relative;
+}
+
+.heroPanel::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  background:
+    linear-gradient(90deg, transparent, rgba(66, 217, 255, 0.2), transparent),
+    linear-gradient(135deg, transparent 40%, rgba(155, 140, 255, 0.13));
+  pointer-events: none;
+}
+
+.heroCopy,
+.heroStats {
+  position: relative;
+}
+
+.eyebrow,
+.miniLabel {
+  color: var(--cyan);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  margin: 0 0 10px;
+  text-transform: uppercase;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin-top: 0;
+}
+
+h1 {
+  max-width: 900px;
+  margin-bottom: 14px;
+  font-size: clamp(2.25rem, 5.5vw, 5.5rem);
+  line-height: 0.94;
+  letter-spacing: -0.08em;
+}
+
+.heroText {
+  max-width: 880px;
+  margin-bottom: 0;
+  color: var(--muted);
+  font-size: clamp(1rem, 2vw, 1.18rem);
+  line-height: 1.72;
+}
+
+.heroStats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(92px, 1fr));
+  gap: 12px;
+  min-width: min(420px, 100%);
+}
+
+.heroStats div {
+  padding: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.heroStats span {
+  display: block;
+  color: #fff;
+  font-size: 2rem;
+  font-weight: 900;
+  letter-spacing: -0.06em;
+}
+
+.heroStats p {
+  margin: 4px 0 0;
+  color: var(--muted);
+  font-size: 0.84rem;
+}
+
+.workspaceGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(340px, 420px);
+  gap: 24px;
+  align-items: start;
+}
+
+.sceneCard,
+.glassPanel {
+  border: 1px solid var(--line);
+  border-radius: 28px;
+  background: var(--panel);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.28);
+  backdrop-filter: blur(18px);
+}
+
+.sceneCard {
+  overflow: hidden;
+}
+
+.sceneToolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 22px;
+  border-bottom: 1px solid var(--line);
+  background: rgba(5, 13, 24, 0.72);
+}
+
+.sceneToolbar h2 {
+  margin: 0;
+  font-size: clamp(1.25rem, 2.6vw, 2rem);
+  letter-spacing: -0.04em;
+}
+
+.toolbarActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+.controlButton,
+.primaryButton,
+.fileImportButton {
+  border: 0;
+  border-radius: 999px;
+  color: #06101b;
+  font-weight: 900;
+  background: linear-gradient(135deg, var(--cyan), #9bf3ff);
+  box-shadow: 0 12px 38px rgba(66, 217, 255, 0.22);
+  transition: transform 180ms ease, filter 180ms ease;
+}
+
+.controlButton.ghost {
+  color: #eafaff;
+  border: 1px solid rgba(147, 207, 255, 0.24);
+  background: rgba(255, 255, 255, 0.06);
+  box-shadow: none;
+}
+
+.controlButton {
+  padding: 12px 18px;
+  white-space: nowrap;
+}
+
+.primaryButton,
+.fileImportButton {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  padding: 14px 18px;
+}
+
+.fileImportButton input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.controlButton:hover,
+.primaryButton:hover,
+.fileImportButton:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.08);
+}
+
+.sceneStage {
+  position: relative;
+  min-height: 670px;
+  aspect-ratio: 1568 / 956;
+  overflow: hidden;
+  background-image:
+    linear-gradient(180deg, rgba(3, 8, 15, 0.04), rgba(3, 8, 15, 0.3)),
+    url("/backgrounds/manager-office.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  isolation: isolate;
+  user-select: none;
+}
+
+.ambientGrid {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 30% 62%, rgba(66, 217, 255, 0.17), transparent 12rem),
+    radial-gradient(circle at 70% 66%, rgba(255, 122, 168, 0.12), transparent 11rem),
+    linear-gradient(180deg, rgba(2, 7, 14, 0), rgba(2, 7, 14, 0.2));
+  pointer-events: none;
+  z-index: 1;
+}
+
+.routeLine {
+  position: absolute;
+  left: 15%;
+  right: 16%;
+  top: 67%;
+  height: 2px;
+  z-index: 2;
+  opacity: 0.78;
+  background: linear-gradient(90deg, transparent, rgba(66, 217, 255, 0.75), rgba(155, 140, 255, 0.64), transparent);
+  filter: drop-shadow(0 0 16px rgba(66, 217, 255, 0.65));
+}
+
+.workflowMarker {
+  position: absolute;
+  z-index: 6;
+  display: grid;
+  grid-template-columns: 28px auto;
+  gap: 8px;
+  align-items: center;
+  min-width: 112px;
+  padding: 8px 10px;
+  border: 1px solid color-mix(in srgb, var(--marker-color) 75%, transparent);
+  border-radius: 999px;
+  color: #effcff;
+  background: rgba(3, 13, 25, 0.72);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35), 0 0 22px color-mix(in srgb, var(--marker-color) 28%, transparent);
+  backdrop-filter: blur(10px);
+  transform: translate(-50%, -50%);
+  transition: transform 180ms ease, background 180ms ease, border-color 180ms ease;
+}
+
+.workflowMarker span {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  color: #08111b;
+  font-size: 0.82rem;
+  font-weight: 950;
+  background: var(--marker-color);
+}
+
+.workflowMarker strong {
+  font-size: 0.78rem;
+  white-space: nowrap;
+}
+
+.workflowMarker:hover,
+.workflowMarker.active {
+  transform: translate(-50%, -50%) scale(1.06);
+  background: rgba(6, 22, 39, 0.92);
+  border-color: var(--marker-color);
+}
+
+.workflowMarker.active::after {
+  content: "";
+  position: absolute;
+  inset: -8px;
+  border: 1px solid color-mix(in srgb, var(--marker-color) 55%, transparent);
+  border-radius: 999px;
+  animation: markerPulse 1.3s ease-out infinite;
+}
+
+.agentPet {
+  position: absolute;
+  z-index: 10;
+  width: var(--pet-frame-w);
+  height: var(--pet-frame-h);
+  transform: translate(-50%, -88%);
+  touch-action: none;
+  cursor: grab;
+  filter: drop-shadow(0 18px 18px rgba(0, 0, 0, 0.36));
+  transition: filter 160ms ease, transform 160ms ease;
+}
+
+.agentPet:active {
+  cursor: grabbing;
+}
+
+.agentPet.active {
+  filter: drop-shadow(0 18px 18px rgba(0, 0, 0, 0.36)) drop-shadow(0 0 16px color-mix(in srgb, var(--agent-color) 45%, transparent));
+}
+
+.agentPet.manual {
+  outline: 1px dashed color-mix(in srgb, var(--agent-color) 55%, transparent);
+  outline-offset: -18px;
+}
+
+.agentPetBody {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: end center;
+}
+
+.codexPetSprite {
+  width: var(--pet-frame-w);
+  height: var(--pet-frame-h);
+  background-size: var(--pet-sheet-w) var(--pet-sheet-h);
+  background-repeat: no-repeat;
+  background-position: 0 var(--pet-idle-row);
+  image-rendering: pixelated;
+  transform: scale(var(--pet-scale));
+  transform-origin: center bottom;
+}
+
+.codexPetSprite.run-right {
+  animation: codexPetRunRight 720ms steps(8) infinite;
+}
+
+.codexPetSprite.run-left {
+  animation: codexPetRunLeft 720ms steps(8) infinite;
+}
+
+.codexPetSprite.idle {
+  animation: codexPetIdle 900ms steps(6) infinite;
+}
+
+.agentBubble {
+  position: absolute;
+  left: 50%;
+  bottom: 166px;
+  z-index: 3;
+  display: grid;
+  gap: 4px;
+  width: max-content;
+  max-width: 260px;
+  padding: 10px 12px;
+  border: 1px solid color-mix(in srgb, var(--agent-color) 50%, transparent);
+  border-radius: 16px 16px 16px 4px;
+  color: #e9fbff;
+  background: rgba(4, 12, 23, 0.8);
+  box-shadow: 0 12px 34px rgba(0, 0, 0, 0.28);
+  backdrop-filter: blur(12px);
+  transform: translateX(-50%);
+  text-align: center;
+  pointer-events: none;
+}
+
+.agentBubble strong {
+  color: var(--agent-color);
+  font-size: 0.82rem;
+}
+
+.agentBubble span {
+  font-size: 0.74rem;
+  font-weight: 760;
+}
+
+.agentFootLabel {
+  position: absolute;
+  left: 50%;
+  bottom: 14px;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  max-width: 190px;
+  padding: 6px 8px;
+  border-radius: 999px;
+  color: #eafbff;
+  background: rgba(0, 0, 0, 0.38);
+  backdrop-filter: blur(8px);
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.agentFootLabel span,
+.agentFootLabel em {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-size: 0.68rem;
+  font-style: normal;
+  font-weight: 850;
+}
+
+.agentFootLabel em {
+  color: var(--agent-color);
+}
+
+.controlPanel {
+  display: grid;
+  gap: 18px;
+}
+
+.glassPanel {
+  padding: 20px;
+}
+
+.promptPanel label {
+  display: block;
+  margin-bottom: 10px;
+  color: #d9efff;
+  font-weight: 850;
+}
+
+textarea {
+  width: 100%;
+  min-height: 132px;
+  resize: vertical;
+  margin-bottom: 14px;
+  padding: 14px;
+  border: 1px solid rgba(147, 207, 255, 0.24);
+  border-radius: 18px;
+  color: var(--text);
+  background: rgba(3, 10, 19, 0.72);
+  outline: none;
+  line-height: 1.56;
+}
+
+textarea:focus,
+select:focus {
+  border-color: rgba(66, 217, 255, 0.72);
+  box-shadow: 0 0 0 4px rgba(66, 217, 255, 0.12);
+}
+
+.importPanel h3,
+.petLibraryPanel h3,
+.agentPanel h3 {
+  margin-bottom: 8px;
+}
+
+.importPanel p {
+  color: var(--muted);
+  line-height: 1.56;
+}
+
+.sampleLink {
+  display: block;
+  margin: 12px 0 8px;
+  color: var(--cyan);
+  font-weight: 850;
+  text-decoration: none;
+}
+
+.sampleLink:hover {
+  text-decoration: underline;
+}
+
+.importStatus {
+  display: block;
+  color: var(--muted);
+  font-size: 0.86rem;
+}
+
+.activePanel {
+  position: relative;
+  overflow: hidden;
+}
+
+.activePanel::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 5px;
+  background: var(--active-color);
+  box-shadow: 0 0 28px var(--active-color);
+}
+
+.activePanel h3 {
+  margin-bottom: 10px;
+  font-size: 1.45rem;
+  letter-spacing: -0.04em;
+}
+
+.activePanel p:last-child {
+  margin-bottom: 0;
+  color: var(--muted);
+  line-height: 1.62;
+}
+
+.petLibraryList {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.petLibraryList button {
+  display: grid;
+  gap: 4px;
+  justify-items: start;
+  padding: 12px;
+  border: 1px solid rgba(147, 207, 255, 0.16);
+  border-radius: 16px;
+  color: #eafaff;
+  background: rgba(255, 255, 255, 0.045);
+}
+
+.petLibraryList button:hover,
+.agentCard:hover {
+  border-color: rgba(66, 217, 255, 0.44);
+  background: rgba(255, 255, 255, 0.072);
+}
+
+.petLibraryList strong {
+  overflow: hidden;
+  max-width: 100%;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.petLibraryList span {
+  color: var(--muted);
+  font-size: 0.76rem;
+}
+
+.agentList {
+  display: grid;
+  gap: 12px;
+}
+
+.agentCard {
+  display: grid;
+  gap: 12px;
+  padding: 12px;
+  border: 1px solid rgba(147, 207, 255, 0.14);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.035);
+  transition: border-color 180ms ease, background 180ms ease;
+}
+
+.agentCardHeader {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: start;
+}
+
+.agentCardHeader strong,
+.agentCardHeader span,
+.agentCardHeader em {
+  display: block;
+}
+
+.agentCardHeader strong {
+  color: var(--agent-color);
+}
+
+.agentCardHeader span,
+.agentCardHeader em {
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-style: normal;
+}
+
+.agentControls {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+select {
+  width: 100%;
+  padding: 10px 9px;
+  border: 1px solid rgba(147, 207, 255, 0.16);
+  border-radius: 12px;
+  color: #eafaff;
+  background: rgba(3, 10, 19, 0.72);
+  outline: none;
+}
+
+.quickActions {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.quickActions button {
+  padding: 9px 8px;
+  border: 1px solid rgba(147, 207, 255, 0.16);
+  border-radius: 12px;
+  color: #eafaff;
+  background: rgba(255, 255, 255, 0.045);
+  font-size: 0.78rem;
+  font-weight: 850;
+}
+
+.quickActions button:hover {
+  border-color: var(--agent-color);
+  color: white;
+}
+
+.logList {
+  display: grid;
+  gap: 12px;
+}
+
+.logItem {
+  display: grid;
+  grid-template-columns: 58px minmax(0, 1fr);
+  gap: 12px;
+  padding: 12px;
+  border: 1px solid rgba(147, 207, 255, 0.12);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.logItem time {
+  color: var(--cyan);
+  font-size: 0.78rem;
+  font-weight: 950;
+}
+
+.logItem strong {
+  display: block;
+  margin-bottom: 4px;
+}
+
+.logItem p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+
+@keyframes codexPetRunRight {
+  from {
+    background-position: 0 var(--pet-run-right-row);
+  }
+
+  to {
+    background-position: calc(-1 * var(--pet-run-width)) var(--pet-run-right-row);
+  }
+}
+
+@keyframes codexPetRunLeft {
+  from {
+    background-position: 0 var(--pet-run-left-row);
+  }
+
+  to {
+    background-position: calc(-1 * var(--pet-run-width)) var(--pet-run-left-row);
+  }
+}
+
+@keyframes codexPetIdle {
+  from {
+    background-position: 0 var(--pet-idle-row);
+  }
+
+  to {
+    background-position: calc(-1 * var(--pet-idle-width)) var(--pet-idle-row);
+  }
+}
+
+@keyframes markerPulse {
+  0% {
+    opacity: 0.9;
+    transform: scale(0.92);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(1.24);
+  }
+}
+
+@media (max-width: 1180px) {
+  .heroPanel,
+  .workspaceGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .heroStats {
+    min-width: 0;
+  }
+
+  .sceneStage {
+    min-height: 560px;
+  }
+}
+
+@media (max-width: 760px) {
+  .pageShell {
+    width: min(100% - 20px, 1480px);
+    padding-top: 12px;
+  }
+
+  .heroPanel,
+  .sceneCard,
+  .glassPanel {
+    border-radius: 22px;
+  }
+
+  .heroPanel {
+    padding: 22px;
+  }
+
+  .heroStats,
+  .petLibraryList,
+  .agentControls {
+    grid-template-columns: 1fr;
+  }
+
+  .sceneToolbar {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .toolbarActions {
+    width: 100%;
+    justify-content: stretch;
+  }
+
+  .toolbarActions .controlButton {
+    flex: 1;
+  }
+
+  .sceneStage {
+    min-height: 520px;
+    background-position: center top;
+  }
+
+  .workflowMarker {
+    min-width: 44px;
+    grid-template-columns: 1fr;
+    padding: 7px;
+  }
+
+  .workflowMarker strong {
+    display: none;
+  }
+
+  .agentPet {
+    --pet-scale: 0.52;
+    transform: translate(-50%, -86%) scale(0.82);
+  }
+
+  .agentBubble {
+    bottom: 150px;
+    max-width: 190px;
+  }
+}
+
+/* Live full-screen layout: scene 80% / menu 20% */
+html,
+body {
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  background: #06101b;
+}
+
+.liveSceneApp {
+  display: grid;
+  grid-template-columns: minmax(0, 4fr) minmax(320px, 1fr);
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: #06101b;
+}
+
+.screenPane {
+  min-width: 0;
+  height: 100vh;
+  border-right: 1px solid rgba(147, 207, 255, 0.22);
+  overflow: hidden;
+}
+
+.menuPane {
+  display: grid;
+  grid-template-rows: auto auto minmax(0, 1fr);
+  min-width: 0;
+  height: 100vh;
+  padding: 14px;
+  background:
+    radial-gradient(circle at 30% 0%, rgba(66, 217, 255, 0.16), transparent 18rem),
+    linear-gradient(180deg, rgba(8, 18, 31, 0.98), rgba(4, 10, 19, 0.98));
+  overflow: hidden;
+}
+
+.sceneStage.fullScreenStage {
+  width: 100%;
+  height: 100vh;
+  min-height: 0;
+  aspect-ratio: auto;
+  border-radius: 0;
+  background-size: cover;
+  background-position: center center;
+}
+
+.sceneBackdrop {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: #08111c;
+}
+
+.sceneBackdrop img {
+  width: 100%;
+  height: 100%;
+  object-position: center center;
+  image-rendering: auto;
+  transition: transform 180ms ease, opacity 180ms ease;
+}
+
+.sceneHud {
+  position: absolute;
+  z-index: 20;
+  border: 1px solid rgba(147, 207, 255, 0.2);
+  background: rgba(4, 12, 23, 0.72);
+  box-shadow: 0 16px 45px rgba(0, 0, 0, 0.28);
+  backdrop-filter: blur(14px);
+}
+
+.topHud {
+  top: 16px;
+  left: 16px;
+  right: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 14px 16px;
+  border-radius: 22px;
+}
+
+.topHud h1 {
+  margin: 0 0 4px;
+  font-size: clamp(1.25rem, 2.2vw, 2.4rem);
+  line-height: 1;
+  letter-spacing: -0.05em;
+}
+
+.topHud span {
+  display: block;
+  max-width: 780px;
+  color: var(--muted);
+  font-size: 0.88rem;
+  line-height: 1.48;
+}
+
+.hudActions {
+  display: flex;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.promptDock {
+  left: 16px;
+  bottom: 16px;
+  width: min(560px, calc(100% - 32px));
+  padding: 14px;
+  border-radius: 22px;
+}
+
+.promptDock label {
+  display: block;
+  margin-bottom: 8px;
+  color: #d9efff;
+  font-size: 0.78rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.promptDock textarea {
+  min-height: 74px;
+  max-height: 120px;
+  margin-bottom: 10px;
+  font-size: 0.86rem;
+}
+
+.promptDock .primaryButton {
+  padding: 11px 14px;
+}
+
+.menuHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 8px 14px;
+}
+
+.menuHeader h2 {
+  margin: 0;
+  font-size: 1.35rem;
+  letter-spacing: -0.05em;
+}
+
+.menuHeader > span {
+  padding: 7px 10px;
+  border: 1px solid rgba(66, 217, 255, 0.24);
+  border-radius: 999px;
+  color: var(--cyan);
+  background: rgba(66, 217, 255, 0.08);
+  font-size: 0.76rem;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+.menuTabs {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+  padding: 6px;
+  border: 1px solid rgba(147, 207, 255, 0.16);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.menuTabs button {
+  min-width: 0;
+  padding: 10px 6px;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  color: var(--muted);
+  background: transparent;
+  font-size: 0.72rem;
+  font-weight: 950;
+}
+
+.menuTabs button.active,
+.menuTabs button:hover {
+  color: #06101b;
+  border-color: rgba(66, 217, 255, 0.8);
+  background: linear-gradient(135deg, var(--cyan), #b5f7ff);
+}
+
+.menuContent {
+  min-height: 0;
+  padding-top: 12px;
+  overflow: hidden;
+}
+
+.compactPanel,
+.pixelChat {
+  height: 100%;
+  min-height: 0;
+  overflow: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(66, 217, 255, 0.65) rgba(255, 255, 255, 0.06);
+}
+
+.compactPanel {
+  border-radius: 20px;
+}
+
+.pixelChat {
+  display: grid;
+  grid-template-rows: auto auto auto minmax(0, 1fr) auto;
+  gap: 10px;
+  padding: 14px;
+  border: 1px solid rgba(147, 207, 255, 0.2);
+  border-radius: 20px;
+  background:
+    linear-gradient(180deg, rgba(9, 22, 37, 0.9), rgba(5, 13, 24, 0.9)),
+    repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.04) 0 1px, transparent 1px 4px);
+  box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.025), 0 20px 60px rgba(0, 0, 0, 0.28);
+  font-family: "Courier New", ui-monospace, monospace;
+}
+
+.pixelChatHeader {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.pixelChatHeader h2 {
+  margin: 0;
+  font-size: 1.15rem;
+  letter-spacing: -0.03em;
+}
+
+.onlineDot {
+  padding: 5px 8px;
+  border: 1px solid rgba(96, 255, 168, 0.4);
+  border-radius: 4px;
+  color: #06101b;
+  background: #60ffa8;
+  box-shadow: 0 0 18px rgba(96, 255, 168, 0.3);
+  font-size: 0.68rem;
+  font-weight: 950;
+}
+
+.fieldLabel {
+  color: var(--muted);
+  font-size: 0.74rem;
+  font-weight: 900;
+}
+
+.pixelSelect {
+  border-radius: 6px;
+  font-family: "Courier New", ui-monospace, monospace;
+}
+
+.chatAgentMiniCard {
+  display: grid;
+  gap: 5px;
+  padding: 10px;
+  border: 1px solid color-mix(in srgb, var(--agent-color) 48%, transparent);
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.28);
+  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.28);
+}
+
+.chatAgentMiniCard strong {
+  color: var(--agent-color);
+  font-size: 0.88rem;
+}
+
+.chatAgentMiniCard span {
+  color: var(--muted);
+  font-size: 0.74rem;
+  line-height: 1.45;
+}
+
+.pixelMessages {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-height: 0;
+  padding-right: 4px;
+  overflow: auto;
+}
+
+.pixelMessage {
+  padding: 10px;
+  border: 1px solid rgba(147, 207, 255, 0.18);
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.045);
+  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.2);
+}
+
+.pixelMessage.user {
+  border-color: rgba(66, 217, 255, 0.45);
+  background: rgba(66, 217, 255, 0.08);
+}
+
+.pixelMessage.agent {
+  border-color: rgba(255, 122, 168, 0.42);
+  background: rgba(255, 122, 168, 0.075);
+}
+
+.pixelMessage.system {
+  border-color: rgba(255, 206, 92, 0.38);
+  background: rgba(255, 206, 92, 0.07);
+}
+
+.pixelMessageMeta {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 6px;
+  color: var(--cyan);
+  font-size: 0.68rem;
+  font-weight: 950;
+  text-transform: uppercase;
+}
+
+.pixelMessage p {
+  margin: 0;
+  color: #eafaff;
+  font-size: 0.79rem;
+  line-height: 1.48;
+}
+
+.pixelComposer {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 8px;
+  align-items: end;
+}
+
+.pixelComposer textarea {
+  min-height: 72px;
+  max-height: 130px;
+  margin: 0;
+  border-radius: 4px;
+  font-family: "Courier New", ui-monospace, monospace;
+  font-size: 0.78rem;
+}
+
+.pixelComposer button {
+  height: 72px;
+  min-width: 70px;
+  border: 0;
+  border-radius: 4px;
+  color: #06101b;
+  background: linear-gradient(135deg, var(--cyan), #aaf5ff);
+  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.35);
+  font-weight: 950;
+}
+
+.pixelComposer button:disabled {
+  cursor: not-allowed;
+  opacity: 0.48;
+  filter: grayscale(0.4);
+}
+
+.nestedPanel {
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(147, 207, 255, 0.14);
+}
+
+.inlineActive {
+  margin-bottom: 12px;
+  padding: 12px 12px 12px 16px;
+  border: 1px solid rgba(147, 207, 255, 0.12);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.inlineActive h3 {
+  margin-bottom: 4px;
+  font-size: 1rem;
+}
+
+.inlineActive p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.82rem;
+  line-height: 1.45;
+}
+
+@media (max-width: 1120px) {
+  html,
+  body {
+    overflow: auto;
+  }
+
+  .liveSceneApp {
+    grid-template-columns: 1fr;
+    grid-template-rows: 72vh auto;
+    height: auto;
+    min-height: 100vh;
+    overflow: visible;
+  }
+
+  .screenPane,
+  .sceneStage.fullScreenStage {
+    height: 72vh;
+  }
+
+  .menuPane {
+    height: auto;
+    min-height: 520px;
+  }
+}
+
+@media (max-width: 760px) {
+  .topHud {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .hudActions,
+  .pixelComposer {
+    width: 100%;
+    grid-template-columns: 1fr;
+  }
+
+  .hudActions .controlButton,
+  .pixelComposer button {
+    width: 100%;
+  }
+
+  .promptDock {
+    display: none;
+  }
+
+  .menuPane {
+    padding: 10px;
+  }
+}
+
+/* Pixel UI upgrade: user supplied SVG icon pack + Google pixel fonts */
+body {
+  font-family: var(--font-thai), var(--font-pixelify), ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+h1,
+h2,
+h3,
+.menuTabs button,
+.controlButton,
+.primaryButton,
+.fileImportButton,
+.onlineDot,
+.workflowMarker strong,
+.agentCardHeader strong,
+.chatAgentMiniCard strong,
+.pixelMessageMeta,
+.logItem strong {
+  font-family: var(--font-pixelify), var(--font-thai), ui-sans-serif, system-ui, sans-serif;
+  letter-spacing: 0.015em;
+}
+
+.miniLabel,
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-family: var(--font-press-start), var(--font-pixelify), var(--font-thai), monospace;
+  font-size: 0.58rem;
+  line-height: 1.6;
+}
+
+.pixelChat,
+.pixelSelect,
+.pixelComposer textarea {
+  font-family: var(--font-pixelify), var(--font-thai), "Courier New", ui-monospace, monospace;
+}
+
+.pixelIcon {
+  width: var(--icon-size, 18px);
+  height: var(--icon-size, 18px);
+  display: inline-block;
+  object-fit: contain;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  filter: drop-shadow(0 0 7px rgba(66, 217, 255, 0.28));
+  flex: 0 0 auto;
+}
+
+.controlButton,
+.primaryButton,
+.fileImportButton,
+.pixelComposer button,
+.menuTabs button,
+.quickActions button,
+.petLibraryList button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+}
+
+.menuTabs button {
+  flex-direction: column;
+  gap: 5px;
+}
+
+.menuTabs button .pixelIcon {
+  width: 18px;
+  height: 18px;
+  opacity: 0.9;
+}
+
+.menuTabs button.active .pixelIcon,
+.menuTabs button:hover .pixelIcon,
+.controlButton:not(.ghost) .pixelIcon,
+.primaryButton .pixelIcon,
+.fileImportButton .pixelIcon,
+.pixelComposer button .pixelIcon {
+  filter: brightness(0) saturate(100%) invert(5%) sepia(42%) saturate(1805%) hue-rotate(172deg) brightness(93%) contrast(98%);
+}
+
+.pixelComposer button {
+  flex-direction: column;
+}
+
+.iconShelf {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(42px, 1fr));
+  gap: 8px;
+}
+
+.iconShelf button {
+  min-height: 40px;
+  border: 1px solid rgba(147, 207, 255, 0.16);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.045);
+  box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.22);
+}
+
+.iconShelf button:hover {
+  border-color: rgba(66, 217, 255, 0.75);
+  background: rgba(66, 217, 255, 0.1);
+  transform: translate(-1px, -1px);
+}
+
+/* Scene editor + editable workflow route */
+.sceneStage.editing::after {
+  content: "EDIT MODE";
+  position: absolute;
+  right: 18px;
+  bottom: 18px;
+  z-index: 24;
+  padding: 7px 10px;
+  border: 1px solid rgba(255, 206, 92, 0.55);
+  border-radius: 8px;
+  color: #06101b;
+  background: #ffce5c;
+  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.32);
+  font-family: var(--font-press-start), var(--font-pixelify), monospace;
+  font-size: 0.54rem;
+}
+
+.workflowEdgesSvg {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: visible;
+}
+
+.workflowEdgeLine {
+  stroke: rgba(66, 217, 255, 0.56);
+  stroke-width: 0.26;
+  stroke-dasharray: 1.2 0.85;
+  stroke-linecap: round;
+  filter: url(#lineGlow);
+  vector-effect: non-scaling-stroke;
+}
+
+.workflowEdgeLine.active {
+  stroke: rgba(255, 206, 92, 0.88);
+  stroke-width: 0.44;
+  stroke-dasharray: none;
+}
+
+.edgeAddButton {
+  position: absolute;
+  z-index: 8;
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid rgba(66, 217, 255, 0.72);
+  border-radius: 10px;
+  color: #06101b;
+  background: linear-gradient(135deg, var(--cyan), #b6f7ff);
+  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.34), 0 0 20px rgba(66, 217, 255, 0.32);
+  transform: translate(-50%, -50%);
+}
+
+.edgeAddButton:hover {
+  transform: translate(calc(-50% - 1px), calc(-50% - 1px));
+  filter: brightness(1.08);
+}
+
+.edgeAddButton .pixelIcon {
+  filter: brightness(0) saturate(100%) invert(5%) sepia(42%) saturate(1805%) hue-rotate(172deg) brightness(93%) contrast(98%);
+}
+
+.workflowMarker.selected {
+  outline: 2px solid color-mix(in srgb, var(--marker-color) 80%, white 12%);
+  outline-offset: 4px;
+}
+
+.sceneStage.editing .workflowMarker,
+.sceneStage.editing .sceneObject {
+  cursor: move;
+}
+
+.promptActions {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 10px;
+  align-items: stretch;
+}
+
+.promptActions .controlButton {
+  padding: 11px 14px;
+}
+
+.controlButton.active {
+  color: #06101b;
+  border-color: rgba(255, 206, 92, 0.88);
+  background: linear-gradient(135deg, #ffce5c, #fff1ac);
+  box-shadow: 0 12px 38px rgba(255, 206, 92, 0.2);
+}
+
+.controlButton:disabled,
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+  filter: grayscale(0.35);
+}
+
+.menuTabs {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.menuTabs button {
+  padding: 9px 5px;
+}
+
+.sceneObject {
+  position: absolute;
+  z-index: 5;
+  display: grid;
+  place-items: center;
+  border: 1px solid color-mix(in srgb, var(--object-color) 64%, transparent);
+  color: #f4fdff;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--object-color) 18%, transparent), rgba(2, 8, 15, 0.52)),
+    rgba(4, 11, 21, 0.58);
+  box-shadow: 5px 5px 0 rgba(0, 0, 0, 0.28), inset 0 0 0 2px rgba(255, 255, 255, 0.04);
+  image-rendering: pixelated;
+  transform: translate(-50%, -50%);
+  pointer-events: auto;
+  backdrop-filter: blur(7px);
+}
+
+.sceneObject span {
+  display: block;
+  max-width: calc(100% - 8px);
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: #eaffff;
+  font-size: 0.68rem;
+  font-weight: 950;
+  text-shadow: 0 2px 0 rgba(0, 0, 0, 0.38);
+  pointer-events: none;
+}
+
+.sceneObject.table {
+  border-radius: 4px 4px 10px 10px;
+}
+
+.sceneObject.table::before,
+.sceneObject.table::after {
+  content: "";
+  position: absolute;
+  bottom: -22%;
+  width: 12%;
+  height: 36%;
+  background: color-mix(in srgb, var(--object-color) 54%, #07111d 40%);
+  box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.24);
+}
+
+.sceneObject.table::before {
+  left: 18%;
+}
+
+.sceneObject.table::after {
+  right: 18%;
+}
+
+.sceneObject.note {
+  border-radius: 2px;
+  transform: translate(-50%, -50%) rotate(-2deg);
+}
+
+.sceneObject.portal {
+  border-radius: 999px;
+  box-shadow: 5px 5px 0 rgba(0, 0, 0, 0.28), 0 0 26px color-mix(in srgb, var(--object-color) 46%, transparent);
+}
+
+.sceneObject.terminal {
+  border-radius: 6px;
+  background:
+    repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.08) 0 1px, transparent 1px 5px),
+    rgba(3, 9, 18, 0.76);
+}
+
+.sceneObject.selected {
+  outline: 2px solid var(--object-color);
+  outline-offset: 4px;
+}
+
+.panelTitleRow,
+.modeSwitch,
+.editorActions,
+.objectAddGrid {
+  display: grid;
+  gap: 8px;
+}
+
+.panelTitleRow {
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+}
+
+.tinyButton,
+.editorActions button,
+.objectAddGrid button,
+.modeSwitch button,
+.dangerButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border: 1px solid rgba(147, 207, 255, 0.18);
+  border-radius: 10px;
+  color: #eafaff;
+  background: rgba(255, 255, 255, 0.052);
+  font-weight: 900;
+}
+
+.tinyButton {
+  padding: 8px 10px;
+  color: var(--cyan);
+}
+
+.helperText {
+  color: var(--muted);
+  font-size: 0.82rem;
+  line-height: 1.55;
+}
+
+.editorStack {
+  display: grid;
+  gap: 8px;
+  margin: 14px 0;
+  padding: 12px;
+  border: 1px solid rgba(147, 207, 255, 0.14);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.pixelInput {
+  width: 100%;
+  padding: 10px 11px;
+  border: 1px solid rgba(147, 207, 255, 0.18);
+  border-radius: 10px;
+  color: var(--text);
+  background: rgba(3, 10, 19, 0.72);
+  outline: none;
+}
+
+.pixelInput:focus,
+input[type="range"]:focus {
+  border-color: rgba(66, 217, 255, 0.72);
+  box-shadow: 0 0 0 4px rgba(66, 217, 255, 0.12);
+}
+
+.rangeGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.rangeGrid label {
+  display: grid;
+  gap: 6px;
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 900;
+}
+
+input[type="range"] {
+  width: 100%;
+  accent-color: var(--cyan);
+}
+
+.editorActions {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.editorActions button,
+.objectAddGrid button,
+.modeSwitch button,
+.dangerButton {
+  min-height: 38px;
+  padding: 9px 8px;
+}
+
+.editorActions button:hover,
+.objectAddGrid button:hover,
+.modeSwitch button:hover,
+.tinyButton:hover {
+  border-color: rgba(66, 217, 255, 0.68);
+  background: rgba(66, 217, 255, 0.1);
+}
+
+.editorActions button.danger,
+.dangerButton {
+  color: #ffd6d6;
+  border-color: rgba(255, 122, 122, 0.32);
+  background: rgba(255, 92, 92, 0.08);
+}
+
+.modeSwitch {
+  grid-template-columns: 1fr 1fr;
+  margin-bottom: 10px;
+  padding: 5px;
+  border: 1px solid rgba(147, 207, 255, 0.16);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.modeSwitch button.active {
+  color: #06101b;
+  border-color: rgba(66, 217, 255, 0.7);
+  background: linear-gradient(135deg, var(--cyan), #b8f7ff);
+}
+
+.objectAddGrid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin: 12px 0;
+}
+
+.workflowList,
+.objectList {
+  display: grid;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.workflowList button,
+.objectList button {
+  display: grid;
+  grid-template-columns: auto minmax(0, 0.75fr) minmax(0, 1fr);
+  gap: 8px;
+  align-items: center;
+  width: 100%;
+  padding: 10px;
+  border: 1px solid rgba(147, 207, 255, 0.14);
+  border-radius: 14px;
+  color: #eafaff;
+  background: rgba(255, 255, 255, 0.04);
+  text-align: left;
+}
+
+.objectList button {
+  grid-template-columns: minmax(0, 1fr) auto;
+}
+
+.workflowList button.selected,
+.objectList button.selected {
+  border-color: color-mix(in srgb, var(--marker-color, var(--object-color)) 65%, transparent);
+  background: color-mix(in srgb, var(--marker-color, var(--object-color)) 12%, transparent);
+}
+
+.workflowList span {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 8px;
+  color: #06101b;
+  background: var(--marker-color);
+  font-weight: 950;
+}
+
+.workflowList strong,
+.workflowList em,
+.objectList strong,
+.objectList span {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.workflowList em,
+.objectList span {
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-style: normal;
+}
+
+.objectList button.selected {
+  border-color: color-mix(in srgb, var(--object-color) 65%, transparent);
+  background: color-mix(in srgb, var(--object-color) 12%, transparent);
+}
+
+.objectEditor {
+  border-color: color-mix(in srgb, var(--object-color, var(--cyan)) 42%, transparent);
+}
+
+@media (max-width: 760px) {
+  .promptActions,
+  .editorActions,
+  .objectAddGrid,
+  .rangeGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .menuTabs {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Settings: background switcher + moved sprite import */
+.settingsPanel {
+  display: grid;
+  gap: 14px;
+}
+
+.settingsBlock h3 {
+  margin: 0 0 6px;
+  font-size: 1rem;
+}
+
+.settingsBadge {
+  align-self: start;
+  padding: 6px 8px;
+  border: 1px solid rgba(96, 255, 168, 0.32);
+  border-radius: 999px;
+  color: #60ffa8;
+  background: rgba(96, 255, 168, 0.08);
+  font-size: 0.68rem;
+  font-weight: 950;
+  white-space: nowrap;
+}
+
+.backgroundPreview {
+  position: relative;
+  min-height: 116px;
+  margin: 12px 0;
+  overflow: hidden;
+  border: 1px solid rgba(147, 207, 255, 0.18);
+  border-radius: 14px;
+  background-size: cover;
+  background-position: center;
+  box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.035), 5px 5px 0 rgba(0, 0, 0, 0.2);
+}
+
+.backgroundPreview::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(2, 7, 14, 0.02), rgba(2, 7, 14, 0.48));
+}
+
+.backgroundPreview span {
+  position: absolute;
+  left: 10px;
+  bottom: 10px;
+  z-index: 1;
+  max-width: calc(100% - 20px);
+  padding: 6px 8px;
+  overflow: hidden;
+  border: 1px solid rgba(66, 217, 255, 0.32);
+  border-radius: 8px;
+  color: #eaffff;
+  background: rgba(3, 10, 19, 0.72);
+  font-size: 0.76rem;
+  font-weight: 950;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.backgroundLibrary {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.backgroundLibrary button {
+  display: grid;
+  grid-template-columns: 68px minmax(0, 1fr) auto;
+  gap: 10px;
+  align-items: center;
+  width: 100%;
+  padding: 8px;
+  border: 1px solid rgba(147, 207, 255, 0.14);
+  border-radius: 12px;
+  color: #eafaff;
+  background: rgba(255, 255, 255, 0.04);
+  text-align: left;
+}
+
+.backgroundLibrary button:hover,
+.backgroundLibrary button.selected {
+  border-color: rgba(66, 217, 255, 0.68);
+  background: rgba(66, 217, 255, 0.1);
+}
+
+.backgroundThumb {
+  display: block;
+  width: 68px;
+  height: 42px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 8px;
+  background-size: cover;
+  background-position: center;
+  image-rendering: auto;
+}
+
+.backgroundLibrary strong,
+.backgroundLibrary em {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.backgroundLibrary strong {
+  font-size: 0.82rem;
+}
+
+.backgroundLibrary em {
+  color: var(--muted);
+  font-size: 0.68rem;
+  font-style: normal;
+}
+
+.secondaryImportButton {
+  color: #eafaff;
+  border: 1px solid rgba(147, 207, 255, 0.22);
+  background: rgba(255, 255, 255, 0.06);
+  box-shadow: none;
+}
+
+.secondaryImportButton .pixelIcon {
+  filter: none;
+}
+
+/* Background fit + freestyle workflow prompt frame */
+.promptDock {
+  max-width: calc(100% - 24px);
+  min-width: min(360px, calc(100% - 24px));
+  touch-action: none;
+}
+
+.promptDockHandle {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  width: 100%;
+  margin: 0 0 10px;
+  padding: 8px 10px;
+  border: 1px dashed rgba(66, 217, 255, 0.42);
+  border-radius: 12px;
+  color: #dff9ff;
+  background: rgba(66, 217, 255, 0.06);
+  font-family: var(--font-pixelify), var(--font-thai), ui-sans-serif, sans-serif;
+  font-size: 0.78rem;
+  font-weight: 950;
+  letter-spacing: 0.02em;
+  cursor: move;
+  user-select: none;
+  touch-action: none;
+}
+
+.promptDockHandle:hover,
+.promptDockHandle:active {
+  border-color: rgba(66, 217, 255, 0.88);
+  background: rgba(66, 217, 255, 0.13);
+  box-shadow: 0 0 22px rgba(66, 217, 255, 0.16);
+}
+
+.sceneStage.editing .promptDock {
+  outline: 2px dashed rgba(255, 206, 92, 0.46);
+  outline-offset: 4px;
+}
+
+.fitModeGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin: 0 0 12px;
+}
+
+.fitModeGrid button {
+  display: grid;
+  gap: 4px;
+  min-height: 72px;
+  padding: 10px;
+  border: 1px solid rgba(147, 207, 255, 0.16);
+  border-radius: 12px;
+  color: #eafaff;
+  background: rgba(255, 255, 255, 0.045);
+  text-align: left;
+}
+
+.fitModeGrid button:hover,
+.fitModeGrid button.selected {
+  border-color: rgba(66, 217, 255, 0.75);
+  background: rgba(66, 217, 255, 0.1);
+}
+
+.fitModeGrid strong {
+  font-family: var(--font-pixelify), var(--font-thai), ui-sans-serif, sans-serif;
+  font-size: 0.84rem;
+}
+
+.fitModeGrid span {
+  color: var(--muted);
+  font-size: 0.68rem;
+  line-height: 1.35;
+}
+
+.settingsActionGroup {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.zoomControlGroup {
+  display: grid;
+  gap: 8px;
+  margin: 0 0 14px;
+  padding: 12px;
+  border: 1px solid rgba(147, 207, 255, 0.14);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.zoomControlGroup label {
+  display: grid;
+  gap: 8px;
+  color: #dff9ff;
+  font-size: 0.86rem;
+  font-weight: 800;
+}
+
+.zoomControlActions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.workflowFrameControls {
+  margin-top: 12px;
+}
+
+.workflowFrameControls label:last-child {
+  grid-column: 1 / -1;
+}
+
+@media (max-width: 760px) {
+  .fitModeGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .promptDock {
+    display: none;
+  }
+}
+
+
+/* Workflow frame visibility, collapse, and resize controls */
+.promptDock {
+  display: grid;
+  grid-template-rows: auto auto minmax(0, 1fr) auto;
+  overflow: visible;
+}
+
+.promptDock.collapsed {
+  height: auto !important;
+  min-height: 0;
+}
+
+.promptDockHeader {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.promptDockHeader .promptDockHandle {
+  margin: 0;
+}
+
+.promptDockTools,
+.workflowFrameQuickActions {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.promptDockTools button,
+.workflowFrameQuickActions button {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  min-height: 34px;
+  padding: 7px 9px;
+  border: 1px solid rgba(147, 207, 255, 0.24);
+  border-radius: 10px;
+  color: #eafaff;
+  background: rgba(255, 255, 255, 0.055);
+  font-family: var(--font-pixelify), var(--font-thai), ui-sans-serif, sans-serif;
+  font-size: 0.72rem;
+  font-weight: 900;
+}
+
+.promptDockTools button:hover,
+.workflowFrameQuickActions button:hover,
+.workflowFrameQuickActions button.active {
+  border-color: rgba(66, 217, 255, 0.7);
+  background: rgba(66, 217, 255, 0.12);
+}
+
+.promptDock textarea {
+  height: 100%;
+  min-height: 0;
+  resize: none;
+}
+
+.promptDockResizeHandle {
+  position: absolute;
+  right: 8px;
+  bottom: 8px;
+  z-index: 5;
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid rgba(66, 217, 255, 0.58);
+  border-radius: 10px;
+  color: #06101b;
+  background: linear-gradient(135deg, var(--cyan), #b6f7ff);
+  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.34);
+  cursor: nwse-resize;
+  touch-action: none;
+}
+
+.promptDockToggle {
+  position: absolute;
+  z-index: 22;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 14px;
+  border-radius: 14px;
+  color: #06101b;
+  background: linear-gradient(135deg, var(--cyan), #b6f7ff);
+  border: 1px solid rgba(66, 217, 255, 0.7);
+  box-shadow: 5px 5px 0 rgba(0, 0, 0, 0.34);
+  font-family: var(--font-pixelify), var(--font-thai), ui-sans-serif, sans-serif;
+  font-weight: 950;
+}
+
+/* Transparent desk object support */
+.sceneObject.imageObject {
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
+  overflow: visible;
+}
+
+.sceneObject.imageObject.selected {
+  outline: 2px dashed var(--object-color);
+  outline-offset: 6px;
+}
+
+.sceneObjectImage {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+  user-select: none;
+  image-rendering: auto;
+  filter: drop-shadow(5px 9px 5px rgba(0, 0, 0, 0.32));
+}
+
+.sceneObject.imageObject .sceneObjectLabel {
+  position: absolute;
+  left: 50%;
+  bottom: -18px;
+  transform: translateX(-50%);
+  display: none;
+  width: max-content;
+  max-width: 180px;
+  padding: 4px 7px;
+  border: 1px solid rgba(147, 207, 255, 0.22);
+  border-radius: 8px;
+  background: rgba(3, 10, 20, 0.82);
+  color: #eafaff;
+  font-size: 0.62rem;
+}
+
+.sceneStage.editing .sceneObject.imageObject .sceneObjectLabel,
+.sceneObject.imageObject.selected .sceneObjectLabel {
+  display: block;
+}
+
+.deskPresetGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin: 10px 0 12px;
+}
+
+.deskPresetGrid button {
+  display: grid;
+  grid-template-columns: 56px minmax(0, 1fr);
+  gap: 8px;
+  align-items: center;
+  min-height: 58px;
+  padding: 8px;
+  border: 1px solid rgba(147, 207, 255, 0.16);
+  border-radius: 12px;
+  color: #eafaff;
+  background: rgba(255, 255, 255, 0.045);
+  text-align: left;
+}
+
+.deskPresetGrid button:hover {
+  border-color: rgba(66, 217, 255, 0.72);
+  background: rgba(66, 217, 255, 0.11);
+}
+
+.deskPresetGrid img {
+  width: 56px;
+  height: 44px;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+.deskPresetGrid span {
+  overflow: hidden;
+  font-size: 0.76rem;
+  font-weight: 900;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.workflowFrameQuickActions {
+  margin: 10px 0 2px;
+}
+
+.workflowFrameControls label:last-child {
+  grid-column: auto;
+}
+
+@media (max-width: 760px) {
+  .promptDockToggle {
+    display: none;
+  }
+}
+
+/* Desk rotation + cleaner edit selection */
+.rangeGrid .wideRange {
+  grid-column: 1 / -1;
+}
+
+.rotateActions {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-top: 4px;
+}
+
+.sceneObject.selected {
+  outline: 0;
+}
+
+.sceneStage.editing .sceneObject.selected {
+  outline: 2px solid var(--object-color);
+  outline-offset: 4px;
+}
+
+.sceneStage.editing .sceneObject.imageObject.selected {
+  outline: 2px dashed var(--object-color);
+  outline-offset: 6px;
+}
+
+.sceneStage.playing .sceneObject,
+.sceneStage.playing .sceneObject.imageObject {
+  outline: 0 !important;
+}
+
+/* Floating workflow/memory/progress panels + model console */
+.consoleModeSwitch {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  margin-bottom: 8px;
+  padding: 6px;
+  border: 1px solid rgba(147, 207, 255, 0.16);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.consoleModeSwitch button {
+  min-width: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 10px 8px;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  color: var(--muted);
+  background: transparent;
+  font-family: var(--font-pixelify), var(--font-thai), ui-sans-serif, sans-serif;
+  font-size: 0.78rem;
+  font-weight: 950;
+}
+
+.consoleModeSwitch button.active,
+.consoleModeSwitch button:hover {
+  color: #06101b;
+  border-color: rgba(66, 217, 255, 0.8);
+  background: linear-gradient(135deg, var(--cyan), #b5f7ff);
+}
+
+.floatingScenePanel {
+  z-index: 18;
+  min-width: 260px;
+  overflow: hidden;
+  border-radius: 20px;
+  background: rgba(4, 12, 23, 0.8);
+  box-shadow: 0 16px 45px rgba(0, 0, 0, 0.32), inset 0 0 0 1px rgba(255, 255, 255, 0.03);
+}
+
+.floatingScenePanel.collapsed {
+  min-width: 220px;
+}
+
+.floatingPanelHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 9px;
+  border-bottom: 1px solid rgba(147, 207, 255, 0.14);
+  background: rgba(7, 20, 34, 0.88);
+}
+
+.floatingPanelHandle {
+  flex: 1;
+  min-width: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 9px;
+  border: 1px dashed rgba(66, 217, 255, 0.35);
+  border-radius: 12px;
+  color: #eafaff;
+  background: rgba(66, 217, 255, 0.06);
+  font-family: var(--font-pixelify), var(--font-thai), ui-sans-serif, sans-serif;
+  font-weight: 950;
+  cursor: move;
+  touch-action: none;
+}
+
+.floatingPanelTools {
+  display: flex;
+  gap: 5px;
+}
+
+.floatingPanelTools button,
+.panelInlineButton {
+  border: 1px solid rgba(147, 207, 255, 0.22);
+  border-radius: 10px;
+  color: #dff9ff;
+  background: rgba(255, 255, 255, 0.06);
+  font-size: 0.72rem;
+  font-weight: 900;
+}
+
+.floatingPanelTools button {
+  padding: 8px 9px;
+}
+
+.panelInlineButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 10px;
+  margin-top: 8px;
+}
+
+.floatingPanelBody {
+  position: relative;
+  height: calc(100% - 58px);
+  min-height: 0;
+  padding: 12px;
+  overflow: auto;
+}
+
+.memoryContextBody {
+  display: grid;
+  gap: 8px;
+}
+
+.memoryContextBody p {
+  display: grid;
+  gap: 4px;
+  margin: 0;
+  padding: 9px;
+  border: 1px solid rgba(147, 207, 255, 0.13);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.memoryContextBody strong,
+.miniWorkflowList strong {
+  color: #eafaff;
+  font-family: var(--font-pixelify), var(--font-thai), ui-sans-serif, sans-serif;
+}
+
+.memoryContextBody span,
+.miniWorkflowList em,
+.progressPanelBody p {
+  color: var(--muted);
+  font-size: 0.78rem;
+  line-height: 1.45;
+}
+
+.miniWorkflowList {
+  display: grid;
+  align-content: start;
+  gap: 7px;
+}
+
+.miniWorkflowList > button:not(.panelInlineButton):not(.floatingPanelResizeHandle) {
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr);
+  gap: 8px;
+  align-items: center;
+  padding: 8px;
+  border: 1px solid rgba(147, 207, 255, 0.14);
+  border-radius: 12px;
+  color: #eafaff;
+  background: rgba(255, 255, 255, 0.04);
+  text-align: left;
+}
+
+.miniWorkflowList > button.active {
+  border-color: rgba(255, 206, 92, 0.72);
+  background: rgba(255, 206, 92, 0.12);
+}
+
+.miniWorkflowList > button span {
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 999px;
+  color: #06101b;
+  background: var(--cyan);
+  font-weight: 950;
+}
+
+.miniWorkflowList > button em {
+  grid-column: 2;
+  font-style: normal;
+}
+
+.progressPanelBody {
+  display: grid;
+  align-content: start;
+  gap: 10px;
+}
+
+.progressRingText {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.progressRingText strong {
+  color: var(--cyan);
+  font-family: var(--font-pixelify), var(--font-thai), ui-sans-serif, sans-serif;
+  font-size: clamp(1.7rem, 4vw, 3.2rem);
+  line-height: 1;
+}
+
+.progressRingText span {
+  color: #dff9ff;
+  font-weight: 900;
+}
+
+.workflowProgressBar {
+  height: 16px;
+  padding: 3px;
+  border: 1px solid rgba(147, 207, 255, 0.22);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.workflowProgressBar span {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--cyan), #ffce5c);
+  box-shadow: 0 0 20px rgba(66, 217, 255, 0.45);
+  transition: width 220ms ease;
+}
+
+.floatingPanelResizeHandle {
+  position: absolute;
+  right: 8px;
+  bottom: 8px;
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border: 1px solid rgba(66, 217, 255, 0.55);
+  border-radius: 10px;
+  color: #06101b;
+  background: linear-gradient(135deg, var(--cyan), #b5f7ff);
+  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.34);
+  cursor: nwse-resize;
+  touch-action: none;
+}
+
+.modelConsolePanel {
+  display: grid;
+  align-content: start;
+  gap: 12px;
+}
+
+.modelSummaryCard {
+  display: grid;
+  gap: 5px;
+  padding: 13px;
+  border: 1px solid rgba(66, 217, 255, 0.24);
+  border-radius: 16px;
+  background: rgba(66, 217, 255, 0.08);
+}
+
+.modelSummaryCard strong {
+  color: #eafaff;
+  font-size: 1.06rem;
+}
+
+.modelSummaryCard span,
+.modelSummaryCard em {
+  color: var(--muted);
+  font-style: normal;
+  font-size: 0.82rem;
+}
+
+.modelProviderGrid {
+  display: grid;
+  gap: 8px;
+}
+
+.modelProviderGrid button {
+  display: grid;
+  gap: 4px;
+  padding: 10px;
+  border: 1px solid rgba(147, 207, 255, 0.16);
+  border-radius: 14px;
+  color: #eafaff;
+  background: rgba(255, 255, 255, 0.045);
+  text-align: left;
+}
+
+.modelProviderGrid button.selected,
+.modelProviderGrid button:hover {
+  border-color: rgba(66, 217, 255, 0.74);
+  background: rgba(66, 217, 255, 0.1);
+}
+
+.modelProviderGrid span,
+.modelProviderGrid em {
+  color: var(--muted);
+  font-size: 0.76rem;
+  font-style: normal;
+}
+
+.modelProviderGrid em.configured {
+  color: #60ffa8;
+}
+
+.modelProviderGrid em.missing {
+  color: #ffce5c;
+}
+
+.tokenUsageList {
+  display: grid;
+  gap: 8px;
+}
+
+.tokenUsageCard {
+  display: grid;
+  gap: 8px;
+  padding: 11px;
+  border: 1px solid rgba(147, 207, 255, 0.14);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.tokenUsageCard > div:first-child {
+  display: grid;
+  gap: 3px;
+}
+
+.tokenUsageCard strong {
+  color: #eafaff;
+}
+
+.tokenUsageCard span,
+.tokenUsageCard > em {
+  color: var(--muted);
+  font-size: 0.76rem;
+  font-style: normal;
+}
+
+.tokenUsageCard dl {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+  margin: 0;
+}
+
+.tokenUsageCard dl div {
+  padding: 8px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.tokenUsageCard dt {
+  color: var(--muted);
+  font-size: 0.66rem;
+}
+
+.tokenUsageCard dd {
+  margin: 3px 0 0;
+  color: var(--cyan);
+  font-weight: 950;
+}
+
+.codexCliBox {
+  display: grid;
+  gap: 8px;
+  padding: 12px;
+  border: 1px solid rgba(255, 206, 92, 0.28);
+  border-radius: 16px;
+  background: rgba(255, 206, 92, 0.08);
+}
+
+.codexCliBox p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
+.settingsProviderGrid {
+  margin: 10px 0;
+}
+
+.openDesignCliBox {
+  border-color: rgba(66, 217, 255, 0.28);
+  background: rgba(66, 217, 255, 0.07);
+}
+
+.cliToolGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.cliToolGrid button {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+  padding: 10px;
+  border: 1px solid rgba(147, 207, 255, 0.16);
+  border-radius: 14px;
+  color: #eafaff;
+  background: rgba(255, 255, 255, 0.045);
+  text-align: left;
+}
+
+.cliToolGrid button.selected,
+.cliToolGrid button:hover {
+  border-color: rgba(66, 217, 255, 0.76);
+  background: rgba(66, 217, 255, 0.12);
+}
+
+.cliToolGrid strong {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cliToolGrid span,
+.cliToolGrid em {
+  overflow: hidden;
+  color: var(--muted);
+  font-size: 0.7rem;
+  font-style: normal;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cliToolGrid em.configured {
+  color: #60ffa8;
+}
+
+.cliToolGrid em.missing {
+  color: #ffce5c;
+}
+
+.cliBridgePanel {
+  display: grid;
+  gap: 10px;
+  padding: 11px;
+  border: 1px solid rgba(147, 207, 255, 0.14);
+  border-radius: 14px;
+  background: rgba(2, 8, 16, 0.46);
+}
+
+.cliBridgePanel > div {
+  display: grid;
+  gap: 3px;
+}
+
+.cliBridgePanel strong {
+  color: #eafaff;
+}
+
+.cliBridgePanel span {
+  color: var(--muted);
+  font-size: 0.76rem;
+}
+
+.cliRunOutput {
+  display: grid;
+  gap: 8px;
+  padding: 10px;
+  border: 1px solid rgba(147, 207, 255, 0.16);
+  border-radius: 14px;
+  background: rgba(2, 8, 16, 0.62);
+}
+
+.cliRunOutput pre {
+  max-height: 220px;
+  margin: 0;
+  overflow: auto;
+  color: #dff9ff;
+  font-size: 0.72rem;
+  line-height: 1.5;
+  white-space: pre-wrap;
+}
+
+.settingsCliGrid {
+  margin: 10px 0;
+}
+
+/* Local small-model runtime settings placeholder */
+.localRuntimePanel {
+  border-color: rgba(96, 255, 168, 0.26);
+  background: rgba(96, 255, 168, 0.07);
+}
+
+.localRuntimeHero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 11px;
+  border: 1px solid rgba(147, 207, 255, 0.14);
+  border-radius: 14px;
+  background: rgba(2, 8, 16, 0.46);
+}
+
+.localRuntimeHero > div {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+}
+
+.localRuntimeHero strong {
+  color: #eafaff;
+}
+
+.localRuntimeHero span,
+.localRuntimeHero em {
+  overflow: hidden;
+  color: var(--muted);
+  font-size: 0.74rem;
+  font-style: normal;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.localRuntimeHero em {
+  color: #ffce5c;
+}
+
+.localRoleGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.localRoleGrid button {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+  padding: 10px;
+  border: 1px solid rgba(147, 207, 255, 0.16);
+  border-radius: 14px;
+  color: #eafaff;
+  background: rgba(255, 255, 255, 0.045);
+  text-align: left;
+}
+
+.localRoleGrid button.selected,
+.localRoleGrid button:hover {
+  border-color: rgba(96, 255, 168, 0.74);
+  background: rgba(96, 255, 168, 0.1);
+}
+
+.localRoleGrid strong,
+.localRoleGrid span,
+.localRoleGrid em {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.localRoleGrid span,
+.localRoleGrid em {
+  color: var(--muted);
+  font-size: 0.7rem;
+  font-style: normal;
+}
+
+.localRuntimeSettingsBlock {
+  border-color: rgba(96, 255, 168, 0.2);
+}
+
+.settingsLocalRuntimeHero,
+.settingsLocalRoleGrid {
+  margin: 10px 0;
+}
+
+/* API model to CLI detailed config dialog */
+.apiCliSummaryCard {
+  position: relative;
+  padding-right: 120px;
+}
+
+.apiCliSummaryCard .tinyButton {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.apiCliProviderGrid small {
+  overflow: hidden;
+  color: #77e8ff;
+  font-size: 0.7rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.apiCliPairPanel {
+  display: grid;
+  gap: 10px;
+  padding: 12px;
+  border: 1px solid rgba(66, 217, 255, 0.22);
+  border-radius: 16px;
+  background: rgba(66, 217, 255, 0.07);
+}
+
+.apiCliPairPanel > div {
+  display: grid;
+  gap: 3px;
+  padding: 9px;
+  border: 1px solid rgba(147, 207, 255, 0.12);
+  border-radius: 12px;
+  background: rgba(2, 8, 16, 0.44);
+}
+
+.apiCliPairPanel strong {
+  color: #eafaff;
+}
+
+.apiCliPairPanel span {
+  color: var(--muted);
+  font-size: 0.76rem;
+}
+
+.configDialogOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  display: grid;
+  place-items: center;
+  padding: 22px;
+  background: rgba(1, 6, 13, 0.74);
+  backdrop-filter: blur(12px);
+}
+
+.configDialog {
+  display: grid;
+  grid-template-rows: auto auto minmax(0, 1fr) auto;
+  width: min(1120px, calc(100vw - 34px));
+  max-height: min(860px, calc(100vh - 34px));
+  border: 1px solid rgba(147, 207, 255, 0.24);
+  border-radius: 24px;
+  background:
+    radial-gradient(circle at 15% 0%, rgba(66, 217, 255, 0.18), transparent 20rem),
+    linear-gradient(180deg, rgba(9, 22, 38, 0.98), rgba(4, 11, 21, 0.98));
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.55);
+  overflow: hidden;
+}
+
+.configDialogHeader,
+.configDialogFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px 20px;
+  border-bottom: 1px solid rgba(147, 207, 255, 0.16);
+}
+
+.configDialogHeader h2 {
+  margin: 0 0 5px;
+  letter-spacing: -0.04em;
+}
+
+.configDialogHeader span,
+.configDialogFooter span {
+  color: var(--muted);
+  font-size: 0.84rem;
+}
+
+.dialogCloseButton {
+  width: 38px;
+  height: 38px;
+  border: 1px solid rgba(147, 207, 255, 0.18);
+  border-radius: 12px;
+  color: #eafaff;
+  background: rgba(255, 255, 255, 0.06);
+  font-size: 1.4rem;
+  line-height: 1;
+}
+
+.dialogTabSwitch {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  padding: 12px 20px;
+  border-bottom: 1px solid rgba(147, 207, 255, 0.16);
+}
+
+.dialogTabSwitch button {
+  padding: 10px;
+  border: 1px solid rgba(147, 207, 255, 0.14);
+  border-radius: 12px;
+  color: #dff9ff;
+  background: rgba(255, 255, 255, 0.04);
+  font-weight: 900;
+}
+
+.dialogTabSwitch button.active,
+.dialogTabSwitch button:hover {
+  border-color: rgba(66, 217, 255, 0.76);
+  background: rgba(66, 217, 255, 0.12);
+}
+
+.configDialogBody {
+  display: grid;
+  grid-template-columns: minmax(220px, 280px) minmax(0, 1fr);
+  gap: 14px;
+  min-height: 0;
+  padding: 16px 20px;
+  overflow: hidden;
+}
+
+.configPairList {
+  display: grid;
+  align-content: start;
+  gap: 8px;
+  overflow: auto;
+}
+
+.configPairList button {
+  display: grid;
+  gap: 4px;
+  padding: 11px;
+  border: 1px solid rgba(147, 207, 255, 0.14);
+  border-radius: 14px;
+  color: #eafaff;
+  background: rgba(255, 255, 255, 0.045);
+  text-align: left;
+}
+
+.configPairList button.selected,
+.configPairList button:hover {
+  border-color: rgba(66, 217, 255, 0.74);
+  background: rgba(66, 217, 255, 0.12);
+}
+
+.configPairList span,
+.configPairList em {
+  overflow: hidden;
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-style: normal;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.configDetailPane {
+  min-width: 0;
+  overflow: auto;
+}
+
+.configDetailGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.configDetailCard {
+  display: grid;
+  gap: 12px;
+  padding: 14px;
+  border: 1px solid rgba(147, 207, 255, 0.16);
+  border-radius: 18px;
+  background: rgba(2, 8, 16, 0.5);
+}
+
+.configDetailCard.highlight {
+  border-color: rgba(96, 255, 168, 0.26);
+  background: rgba(96, 255, 168, 0.07);
+}
+
+.configDetailCard.wide {
+  min-height: 100%;
+}
+
+.configDetailCard h3 {
+  margin: 0;
+}
+
+.configDetailCard dl {
+  display: grid;
+  gap: 7px;
+  margin: 0;
+}
+
+.configDetailCard dl div {
+  display: grid;
+  gap: 3px;
+  padding: 8px;
+  border: 1px solid rgba(147, 207, 255, 0.1);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.configDetailCard dt {
+  color: var(--muted);
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.configDetailCard dd {
+  margin: 0;
+  color: #eafaff;
+  overflow-wrap: anywhere;
+}
+
+.cliMatrix {
+  display: grid;
+  gap: 8px;
+}
+
+.cliMatrix div {
+  display: grid;
+  grid-template-columns: minmax(120px, 1fr) minmax(120px, 1fr) minmax(120px, 1fr);
+  gap: 6px;
+  align-items: center;
+  padding: 9px;
+  border: 1px solid rgba(147, 207, 255, 0.1);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.cliMatrix span,
+.cliMatrix em {
+  overflow: hidden;
+  color: var(--muted);
+  font-size: 0.74rem;
+  font-style: normal;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cliMatrix code {
+  grid-column: 1 / -1;
+  overflow-wrap: anywhere;
+}
+
+.envPreviewBlock {
+  max-height: 280px;
+  margin: 0;
+  padding: 12px;
+  overflow: auto;
+  border: 1px solid rgba(147, 207, 255, 0.14);
+  border-radius: 14px;
+  color: #dff9ff;
+  background: rgba(0, 0, 0, 0.3);
+  font-size: 0.78rem;
+  line-height: 1.55;
+  white-space: pre-wrap;
+}
+
+.configDialogFooter {
+  border-top: 1px solid rgba(147, 207, 255, 0.16);
+  border-bottom: 0;
+}
+
+.configDialogFooter > div {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+@media (max-width: 860px) {
+  .configDialogBody,
+  .configDetailGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .configDialogBody {
+    overflow: auto;
+  }
+
+  .configPairList {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .apiCliSummaryCard {
+    padding-right: 12px;
+  }
+
+  .apiCliSummaryCard .tinyButton {
+    position: static;
+    justify-self: start;
+  }
+}
+
+/* Layout pass: movable scene buttons, hideable topbar, cleaner right console */
+.liveSceneApp {
+  grid-template-columns: minmax(0, 1fr) clamp(360px, 24vw, 460px);
+}
+
+.menuPane {
+  grid-template-rows: auto auto auto minmax(0, 1fr);
+  gap: 8px;
+  padding: 12px;
+}
+
+.menuHeader {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: start;
+  gap: 8px;
+  padding: 8px 6px 6px;
+}
+
+.menuHeader h2 {
+  overflow-wrap: anywhere;
+  line-height: 1.05;
+}
+
+.menuHeader > span {
+  justify-self: start;
+  max-width: 100%;
+  overflow: hidden;
+  white-space: normal;
+  text-overflow: ellipsis;
+}
+
+.consoleModeSwitch,
+.menuTabs {
+  align-self: start;
+}
+
+.consoleModeSwitch button,
+.menuTabs button {
+  min-height: 42px;
+  overflow: hidden;
+  line-height: 1.1;
+  text-overflow: ellipsis;
+}
+
+.menuContent {
+  min-height: 0;
+  overflow: auto;
+  padding-right: 4px;
+}
+
+.compactPanel,
+.pixelChat {
+  height: auto;
+  min-height: 100%;
+  max-height: none;
+}
+
+.modelSummaryCard.apiCliSummaryCard {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.modelSummaryCard.apiCliSummaryCard .tinyButton,
+.modelProviderGrid button,
+.cliToolGrid button,
+.tokenUsageCard,
+.localRoleGrid button {
+  min-width: 0;
+}
+
+.modelProviderGrid strong,
+.modelProviderGrid span,
+.modelProviderGrid em,
+.cliToolGrid strong,
+.cliToolGrid span,
+.cliToolGrid em,
+.tokenUsageCard strong,
+.tokenUsageCard span {
+  overflow-wrap: anywhere;
+  white-space: normal;
+}
+
+.cliToolGrid,
+.localRoleGrid {
+  grid-template-columns: 1fr;
+}
+
+.topHud {
+  right: auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: start;
+  gap: 14px;
+  padding: 12px;
+  overflow: hidden;
+}
+
+.topHudInfo {
+  min-width: 0;
+  display: grid;
+  gap: 6px;
+}
+
+.topHudHandle {
+  justify-self: start;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 9px;
+  border: 1px dashed rgba(66, 217, 255, 0.38);
+  border-radius: 11px;
+  color: var(--cyan);
+  background: rgba(66, 217, 255, 0.06);
+  font-family: var(--font-pixelify), var(--font-thai), ui-sans-serif, sans-serif;
+  font-size: 0.72rem;
+  font-weight: 950;
+  cursor: move;
+  touch-action: none;
+}
+
+.topHud h1 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.topHudTools {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.topHudResizeHandle {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid rgba(66, 217, 255, 0.58);
+  border-radius: 10px;
+  color: #06101b;
+  background: linear-gradient(135deg, var(--cyan), #b6f7ff);
+  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.34);
+  cursor: nwse-resize;
+  touch-action: none;
+}
+
+.sceneActionButtonWrap {
+  position: absolute;
+  z-index: 27;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  transform: translate(-50%, -50%);
+}
+
+.sceneActionButtonWrap .sceneHud,
+.sceneActionButtonWrap .promptDockToggle {
+  position: static;
+}
+
+.sceneActionDragHandle {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border: 1px dashed rgba(66, 217, 255, 0.52);
+  border-radius: 10px;
+  color: var(--cyan);
+  background: rgba(2, 10, 20, 0.82);
+  box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.3);
+  cursor: move;
+  touch-action: none;
+}
+
+.sceneActionButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 42px;
+  padding: 10px 14px;
+  border-radius: 999px;
+  color: #eafaff;
+  border: 1px solid rgba(147, 207, 255, 0.26);
+  background: rgba(12, 27, 45, 0.82);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.28);
+  font-family: var(--font-pixelify), var(--font-thai), ui-sans-serif, sans-serif;
+  font-weight: 950;
+  white-space: nowrap;
+}
+
+.sceneActionButton:hover,
+.sceneActionButton.active {
+  color: #06101b;
+  border-color: rgba(66, 217, 255, 0.85);
+  background: linear-gradient(135deg, var(--cyan), #b5f7ff);
+}
+
+.sceneActionButton.primary {
+  color: #06101b;
+  border-color: rgba(66, 217, 255, 0.9);
+  background: linear-gradient(135deg, var(--cyan), #9bf3ff);
+}
+
+.topbarToggleWrap,
+.workflowToggleWrap {
+  z-index: 29;
+}
+
+.sceneActionButtonWrap .promptDockToggle {
+  display: inline-flex;
+  min-height: 46px;
+}
+
+@media (max-width: 1280px) {
+  .liveSceneApp {
+    grid-template-columns: minmax(0, 1fr) clamp(340px, 30vw, 420px);
+  }
+
+  .sceneActionButton {
+    padding: 9px 11px;
+    font-size: 0.78rem;
+  }
+}
+
+@media (max-width: 1120px) {
+  .liveSceneApp {
+    grid-template-columns: 1fr;
+  }
+
+  .topHud {
+    grid-template-columns: 1fr;
+  }
+
+  .sceneActionButtonWrap {
+    transform: translate(-50%, -50%) scale(0.92);
+  }
+}
+
+.menuContent {
+  grid-row: 4;
+}
+
+/* Config-driven scene layers + pixel bubble workflow editor */
+.sceneStage.fullScreenStage {
+  --layer-background: 0;
+  --layer-ambient: 1;
+  --layer-workflow-edges: 4;
+  --layer-sprites: 10;
+  --layer-workflow-markers: 12;
+  --layer-workflow-controls: 14;
+  --layer-objects: 18;
+  --layer-hud: 24;
+  --layer-floating-panels: 28;
+}
+
+.sceneBackdrop { z-index: var(--layer-background); }
+.ambientGrid { z-index: var(--layer-ambient); }
+.workflowEdgesSvg { z-index: var(--layer-workflow-edges); }
+.agentPet { z-index: var(--layer-sprites); }
+.workflowMarker { z-index: var(--layer-workflow-markers); }
+.edgeAddButton { z-index: var(--layer-workflow-controls); }
+.sceneHud { z-index: var(--layer-hud); }
+.floatingScenePanel { z-index: var(--layer-floating-panels); }
+.sceneObject { z-index: var(--layer-objects); }
+.sceneStage.editing .sceneObject.selected,
+.sceneStage.editing .sceneObject.imageObject.selected {
+  z-index: calc(var(--layer-objects) + 2);
+}
+
+.workflowMarker {
+  grid-template-columns: 34px minmax(0, 1fr);
+  min-width: 124px;
+  padding: 10px 13px 11px 10px;
+  border: 2px solid color-mix(in srgb, var(--marker-color) 80%, #020711 16%);
+  border-radius: 22px 22px 22px 7px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.07), transparent 42%),
+    rgba(6, 14, 27, 0.88);
+  box-shadow:
+    5px 5px 0 rgba(0, 0, 0, 0.34),
+    0 0 20px color-mix(in srgb, var(--marker-color) 24%, transparent);
+  font-family: var(--font-pixelify), var(--font-thai), ui-sans-serif, sans-serif;
+}
+
+.workflowMarker::before {
+  content: "";
+  position: absolute;
+  left: 15px;
+  bottom: -9px;
+  width: 16px;
+  height: 12px;
+  background: rgba(6, 14, 27, 0.92);
+  border-left: 2px solid color-mix(in srgb, var(--marker-color) 72%, #020711 16%);
+  border-bottom: 2px solid color-mix(in srgb, var(--marker-color) 72%, #020711 16%);
+  transform: skewX(-28deg);
+  clip-path: polygon(0 0, 100% 0, 0 100%);
+}
+
+.workflowMarker span {
+  width: 34px;
+  height: 34px;
+  border: 2px solid rgba(255, 255, 255, 0.38);
+  box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.26);
+  font-size: 0.95rem;
+}
+
+.workflowMarker strong {
+  overflow: hidden;
+  font-size: 0.95rem;
+  text-overflow: ellipsis;
+}
+
+.workflowMarker:hover,
+.workflowMarker.active {
+  transform: translate(-50%, -50%) translate(-2px, -2px);
+  box-shadow:
+    7px 7px 0 rgba(0, 0, 0, 0.38),
+    0 0 26px color-mix(in srgb, var(--marker-color) 34%, transparent);
+}
+
+.workflowPanel {
+  border-style: solid;
+  background:
+    linear-gradient(180deg, rgba(66, 217, 255, 0.08), transparent 16rem),
+    rgba(5, 14, 26, 0.92);
+}
+
+.workflowPanel .panelTitleRow {
+  align-items: start;
+  padding: 4px 0 10px;
+}
+
+.workflowPanel .miniLabel,
+.workflowPanel .fieldLabel,
+.workflowPanel .pixelInput,
+.workflowPanel textarea {
+  font-family: var(--font-pixelify), var(--font-thai), ui-sans-serif, sans-serif;
+}
+
+.workflowPanel .editorStack {
+  position: relative;
+  padding: 14px;
+  border: 2px solid rgba(66, 217, 255, 0.3);
+  border-radius: 20px 20px 20px 8px;
+  background: rgba(5, 14, 26, 0.64);
+  box-shadow: 5px 5px 0 rgba(0, 0, 0, 0.28);
+}
+
+.workflowPanel .editorStack::after {
+  content: "";
+  position: absolute;
+  left: 20px;
+  bottom: -11px;
+  width: 18px;
+  height: 14px;
+  background: rgba(5, 14, 26, 0.82);
+  border-left: 2px solid rgba(66, 217, 255, 0.3);
+  border-bottom: 2px solid rgba(66, 217, 255, 0.3);
+  transform: skewX(-28deg);
+  clip-path: polygon(0 0, 100% 0, 0 100%);
+}
+
+.workflowList {
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.workflowList button {
+  position: relative;
+  grid-template-columns: 34px minmax(0, 0.9fr) minmax(0, 1.1fr);
+  min-height: 62px;
+  padding: 12px 14px 13px 11px;
+  border: 2px solid color-mix(in srgb, var(--marker-color, var(--cyan)) 60%, rgba(147, 207, 255, 0.18));
+  border-radius: 20px 20px 20px 7px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.06), transparent 44%),
+    rgba(6, 15, 28, 0.78);
+  box-shadow: 5px 5px 0 rgba(0, 0, 0, 0.26);
+  font-family: var(--font-pixelify), var(--font-thai), ui-sans-serif, sans-serif;
+}
+
+.workflowList button::after {
+  content: "";
+  position: absolute;
+  left: 18px;
+  bottom: -10px;
+  width: 16px;
+  height: 13px;
+  background: rgba(6, 15, 28, 0.9);
+  border-left: 2px solid color-mix(in srgb, var(--marker-color, var(--cyan)) 55%, rgba(147, 207, 255, 0.18));
+  border-bottom: 2px solid color-mix(in srgb, var(--marker-color, var(--cyan)) 55%, rgba(147, 207, 255, 0.18));
+  transform: skewX(-28deg);
+  clip-path: polygon(0 0, 100% 0, 0 100%);
+}
+
+.workflowList button:hover,
+.workflowList button.selected {
+  transform: translate(-2px, -2px);
+  border-color: color-mix(in srgb, var(--marker-color, var(--cyan)) 82%, white 10%);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.09), transparent 44%),
+    color-mix(in srgb, var(--marker-color, var(--cyan)) 14%, rgba(6, 15, 28, 0.84));
+  box-shadow: 7px 7px 0 rgba(0, 0, 0, 0.32);
+}
+
+.workflowList span {
+  width: 34px;
+  height: 34px;
+  border-radius: 12px;
+  border: 2px solid rgba(255, 255, 255, 0.34);
+  box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.24);
+}
+
+.workflowList strong {
+  color: #f4fdff;
+  font-size: 1rem;
+}
+
+.workflowList em {
+  color: #a9c5da;
+  font-size: 0.76rem;
+}
+
+.configFileBanner {
+  display: grid;
+  gap: 6px;
+  margin: 0 0 14px;
+  padding: 12px;
+  border: 2px solid rgba(66, 217, 255, 0.26);
+  border-radius: 16px;
+  background: rgba(66, 217, 255, 0.07);
+  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.22);
+}
+
+.configFileBanner strong {
+  color: #eaffff;
+  font-family: var(--font-pixelify), var(--font-thai), ui-sans-serif, sans-serif;
+  font-size: 0.92rem;
+}
+
+.configFileBanner span {
+  color: var(--muted);
+  font-size: 0.76rem;
+  line-height: 1.45;
+}
+
+.configLayerGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.configLayerGrid code {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  min-width: 0;
+  border-radius: 10px;
+  font-size: 0.72rem;
+}
+
+.sceneStage.playing .sceneObject {
+  pointer-events: none;
+}
+
+.sceneStage.editing .sceneObject {
+  pointer-events: auto;
+}
+
+/* Agent autopilot + pixel speech bubble polish */
+.agentPet.tone-thinking {
+  animation: agentThinkBob 980ms steps(2, end) infinite;
+}
+
+.agentBubble {
+  border: 3px solid color-mix(in srgb, var(--agent-color) 74%, #020711 16%);
+  border-radius: 0;
+  color: #f4fbff;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.08), transparent 46%),
+    rgba(4, 12, 23, 0.94);
+  box-shadow:
+    4px 0 0 rgba(4, 12, 23, 0.94),
+    -4px 0 0 rgba(4, 12, 23, 0.94),
+    0 4px 0 rgba(4, 12, 23, 0.94),
+    0 -4px 0 rgba(4, 12, 23, 0.94),
+    7px 7px 0 rgba(0, 0, 0, 0.42),
+    0 0 22px color-mix(in srgb, var(--agent-color) 26%, transparent);
+  font-family: var(--font-pixelify), var(--font-thai), ui-sans-serif, sans-serif;
+  image-rendering: pixelated;
+}
+
+.agentBubble::after {
+  content: "";
+  position: absolute;
+  left: 18px;
+  bottom: -13px;
+  width: 16px;
+  height: 16px;
+  background: rgba(4, 12, 23, 0.94);
+  border-right: 3px solid color-mix(in srgb, var(--agent-color) 74%, #020711 16%);
+  border-bottom: 3px solid color-mix(in srgb, var(--agent-color) 74%, #020711 16%);
+  transform: rotate(45deg);
+  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.32);
+}
+
+.agentBubble strong {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--agent-color);
+  font-size: 0.9rem;
+  letter-spacing: 0.02em;
+  text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.34);
+}
+
+.agentBubble strong::before {
+  content: "▣";
+  color: var(--agent-color);
+  font-size: 0.8rem;
+}
+
+.agentBubble span {
+  color: #eafbff;
+  font-size: 0.78rem;
+  line-height: 1.3;
+}
+
+.agentBubble em {
+  color: var(--agent-color);
+  font-size: 1rem;
+  font-style: normal;
+  letter-spacing: 0.12em;
+  animation: thinkingDots 760ms steps(3, end) infinite;
+}
+
+.agentBubble.thinking {
+  border-color: #ffce5c;
+  box-shadow:
+    4px 0 0 rgba(4, 12, 23, 0.94),
+    -4px 0 0 rgba(4, 12, 23, 0.94),
+    0 4px 0 rgba(4, 12, 23, 0.94),
+    0 -4px 0 rgba(4, 12, 23, 0.94),
+    7px 7px 0 rgba(0, 0, 0, 0.42),
+    0 0 22px rgba(255, 206, 92, 0.25);
+}
+
+.agentBubble.chat {
+  border-color: color-mix(in srgb, var(--agent-color) 86%, #ffffff 8%);
+}
+
+.agentBubble.workflow {
+  border-style: double;
+}
+
+.agentRuntimeControls {
+  display: grid;
+  gap: 8px;
+  padding: 10px;
+  border: 1px solid rgba(147, 207, 255, 0.14);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.agentRuntimeControls label {
+  display: grid;
+  gap: 6px;
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.pixelToggleRow {
+  display: flex !important;
+  align-items: center;
+  grid-template-columns: auto 1fr;
+  gap: 9px !important;
+  color: #dff9ff !important;
+  text-transform: none !important;
+  letter-spacing: 0 !important;
+}
+
+.pixelToggleRow input {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--agent-color);
+}
+
+@keyframes agentThinkBob {
+  0%, 100% { transform: translate(-50%, -88%) translateY(0); }
+  50% { transform: translate(-50%, -88%) translateY(-3px); }
+}
+
+@keyframes thinkingDots {
+  0% { opacity: 0.25; }
+  50% { opacity: 1; }
+  100% { opacity: 0.25; }
+}

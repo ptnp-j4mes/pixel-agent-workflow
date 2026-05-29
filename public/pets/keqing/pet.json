@@ -1,0 +1,7 @@
+{
+  "id": "keqing",
+  "displayName": "Keqing",
+  "description": "A Keqing-inspired compact pixel-art beautiful girl assistant for Codex.",
+  "spritesheetPath": "spritesheet.webp",
+  "kind": "person"
+}

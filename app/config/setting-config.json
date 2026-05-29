@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "storageKey": "ai-agent-workflow-scene-layout-v6-config-json",
+  "sceneLayers": {
+    "background": 0,
+    "ambient": 1,
+    "workflowEdges": 4,
+    "sprites": 10,
+    "workflowMarkers": 12,
+    "workflowControls": 14,
+    "objects": 18,
+    "hud": 24,
+    "floatingPanels": 28
+  },
+  "workflowEditor": {
+    "style": "pixel-bubble",
+    "bubbleCards": true,
+    "showStepTail": true,
+    "compactNodeList": false
+  },
+  "defaults": {
+    "workflowDockFrame": { "x": 2, "y": 70, "width": 62, "height": 29 },
+    "panels": {
+      "memoryContext": { "x": 55, "y": 18, "width": 28, "height": 28, "visible": false, "collapsed": false },
+      "workflowMap": { "x": 6, "y": 18, "width": 34, "height": 34, "visible": false, "collapsed": false },
+      "progress": { "x": 44, "y": 58, "width": 34, "height": 22, "visible": true, "collapsed": false },
+      "topHud": { "x": 1.2, "y": 2.4, "width": 97, "height": 16, "visible": true, "collapsed": false }
+    },
+    "sceneButtonFrames": {
+      "editScene": { "x": 29, "y": 10.5 },
+      "memory": { "x": 42, "y": 10.5 },
+      "workflow": { "x": 55, "y": 10.5 },
+      "progress": { "x": 68, "y": 10.5 },
+      "freeRoam": { "x": 81, "y": 10.5 },
+      "runPause": { "x": 93, "y": 10.5 },
+      "workflowToggle": { "x": 3, "y": 66 },
+      "topbarToggle": { "x": 3, "y": 4 }
+    }
+  }
+}
