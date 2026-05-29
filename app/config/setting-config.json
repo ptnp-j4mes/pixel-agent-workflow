@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "storageKey": "ai-agent-workflow-scene-layout-v6-config-json",
+  "storageKey": "ai-agent-workflow-scene-layout-v7-kanban",
   "sceneLayers": {
     "background": 0,
     "ambient": 1,
@@ -18,6 +18,12 @@
     "showStepTail": true,
     "compactNodeList": false
   },
+  "jobWorkflow": {
+    "style": "pixel-kanban",
+    "columns": ["Backlog", "Doing", "Review", "Done"],
+    "dialogPositions": ["center", "left", "right", "bottom"],
+    "defaultDialogPosition": "right"
+  },
   "defaults": {
     "workflowDockFrame": { "x": 2, "y": 70, "width": 62, "height": 29 },
     "panels": {
@@ -27,6 +33,7 @@
       "topHud": { "x": 1.2, "y": 2.4, "width": 97, "height": 16, "visible": true, "collapsed": false }
     },
     "sceneButtonFrames": {
+      "jobWorkflow": { "x": 16, "y": 10.5 },
       "editScene": { "x": 29, "y": 10.5 },
       "memory": { "x": 42, "y": 10.5 },
       "workflow": { "x": 55, "y": 10.5 },
